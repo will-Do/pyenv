@@ -40,7 +40,9 @@ else
     local path="$1"
 
     while [ -n "$path" ]; do
-      cd "${path%/*}"
+      if [ -d "${path%/*}" ]; then
+        cd "${path%/*}"
+      fi
       local name="${path##*/}"
       path="$(resolve_link "$name" || true)"
     done
